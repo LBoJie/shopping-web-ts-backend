@@ -63,6 +63,7 @@ const app = express();
 require("dotenv").config();
 
 app.use(cors());
+app.set('trust proxy', true);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 setupSwagger(app);
