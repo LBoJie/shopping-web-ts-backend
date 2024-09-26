@@ -422,12 +422,18 @@ router.post(
         ],
       });
       const validateAmount = cart!.cartItems!.reduce((acc, item) => {
-        const isActive = item.product!.promotionItem && item.product!.promotionItem.promotion.isActive;
+        let isWithinRange = false;
+        const today = new Date();
+        const startDate = new Date(item.product!.promotionItem!.promotion.startDate);
+        const endDate = new Date(item.product!.promotionItem!.promotion.endDate);
+        isWithinRange = today >= startDate && today <= endDate;
+
+        const isActive = item.product!.promotionItem && item.product!.promotionItem.promotion.isActive && isWithinRange;
         const price = isActive ? Math.ceil(item.product!.price * (item.product!.promotionItem!.promotion.discountValue / 100)) : item.product!.price;
         return acc + price * item.quantity;
       }, 0);
       if (totalAmount !== validateAmount) {
-        return res.status(HttpStatusCodes.BAD_REQUEST).json(responseFormat(req.body, "金額不正確，請聯繫客服"));
+        return res.status(HttpStatusCodes.BAD_REQUEST).json(responseFormat(req.body, `金額不正確，請聯繫客服 正確金額: ${validateAmount}`));
       }
 
       const order = await OrderModel.create({
@@ -441,7 +447,12 @@ router.post(
         status: "created",
       });
       const orderItems = cart!.cartItems!.map((item) => {
-        const isActive = item.product!.promotionItem && item.product!.promotionItem.promotion.isActive;
+        let isWithinRange = false;
+        const today = new Date();
+        const startDate = new Date(item.product!.promotionItem!.promotion.startDate);
+        const endDate = new Date(item.product!.promotionItem!.promotion.endDate);
+        isWithinRange = today >= startDate && today <= endDate;
+        const isActive = item.product!.promotionItem && item.product!.promotionItem.promotion.isActive && isWithinRange;
         const discountPrice = isActive ? Math.ceil(item.product!.price * (item.product!.promotionItem!.promotion.discountValue / 100)) : null;
         return {
           orderId: order.id,
