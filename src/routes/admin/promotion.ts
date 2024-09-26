@@ -269,7 +269,6 @@ router.get("/:id?", async (req: IReq, res: IRes) => {
         } else {
           result.productIds = [];
         }
-        console.log(result);
         res.status(HttpStatusCodes.OK).json(responseFormat(req.body, result));
       } else {
         res.status(HttpStatusCodes.BAD_REQUEST).json(responseFormat(req.body, "無此活動"));
@@ -373,8 +372,6 @@ router.get("/:id?", async (req: IReq, res: IRes) => {
 router.post("/", uploadMemory.single("img"), async (req: IReq<Promotion>, res: IRes) => {
   try {
     const promotion = req.body;
-    console.log(promotion.isActive);
-    // let imgUrl: string | null = null;
     if (req.file) {
       //上傳圖片到 aws-s3
       const putParams = {
@@ -514,7 +511,6 @@ router.patch("/:id", uploadMemory.single("img"), async (req: IReq<PromotionPatch
 
     await promotion.update(updatedFields);
     if (updatedFields.productIds) {
-      console.log(updatedFields.productIds);
       await PromotionItemModel.destroy({ where: { promotionId: promotionId } });
       if (updatedFields.productIds.length > 0) {
         const promotionProducts = (updatedFields.productIds as number[]).map((id) => {

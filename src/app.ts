@@ -79,10 +79,6 @@ if (process.env.NODE_ENV === "development") {
 //     // 同步所有模型
 //     await sequelize.sync({ alter: true }); // alter: true 會自動創建/更新表格
 //     console.log('Database synced successfully.');
-
-//     // 啟動你的 Express 應用
-//     // app.listen(...) 或其他啟動代碼
-
 //   } catch (error) {
 //     console.error('Unable to sync database:', error);
 //   }

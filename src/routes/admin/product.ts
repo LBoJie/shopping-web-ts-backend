@@ -543,7 +543,6 @@ router.patch("/:id", uploadMemory.single("img"), async (req: IReq<PatchRequest>,
     let updateProduct = jsonpatch.applyPatch(product.toJSON(), patch).newDocument;
     let deleteImg = false;
     patch.forEach((item) => {
-      console.log(item.path);
       if (item.path === "/imgUrl" && product.imgUrl) {
         deleteImg = true;
       }

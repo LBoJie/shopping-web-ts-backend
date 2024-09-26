@@ -552,6 +552,7 @@ router.get("/:id", async (req: IReq, res: IRes) => {
       inventory: product.inventory,
       name: product.name,
       price: product.price,
+      descriptionHtml: product.descriptionHtml,
       promotion:
         product.promotionItem && product.promotionItem.promotion.isActive && isWithinRange
           ? {
@@ -566,7 +567,6 @@ router.get("/:id", async (req: IReq, res: IRes) => {
     };
     res.status(HttpStatusCodes.OK).json(responseFormat(req.body, result));
   } catch (err: any) {
-    console.log(err);
     res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json(responseFormat(req.body, err.message));
   }
 });

@@ -693,7 +693,6 @@ router.post("/forgot-password", async (req: IReq<ForgetPasswordRequest>, res: IR
     }
     const token = crypto.randomBytes(32).toString("hex");
     const expires = new Date();
-    console.log(expires);
     expires.setHours(expires.getHours() + 1); // 令牌有效期 1 小時
 
     await PasswordResetModel.create({
