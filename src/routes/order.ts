@@ -422,13 +422,15 @@ router.post(
         ],
       });
       const validateAmount = cart!.cartItems!.reduce((acc, item) => {
-        let isWithinRange = false;
-        const today = new Date();
-        const startDate = new Date(item.product!.promotionItem!.promotion.startDate);
-        const endDate = new Date(item.product!.promotionItem!.promotion.endDate);
-        isWithinRange = today >= startDate && today <= endDate;
-
-        const isActive = item.product!.promotionItem && item.product!.promotionItem.promotion.isActive && isWithinRange;
+        let isActive = false;
+        if (item.product!.promotionItem) {
+          const today = new Date();
+          const startDate = new Date(item.product!.promotionItem.promotion.startDate);
+          const endDate = new Date(item.product!.promotionItem.promotion.endDate);
+          if (today >= startDate && today <= endDate && item.product!.promotionItem.promotion.isActive) {
+            isActive = true;
+          }
+        }
         const price = isActive ? Math.ceil(item.product!.price * (item.product!.promotionItem!.promotion.discountValue / 100)) : item.product!.price;
         return acc + price * item.quantity;
       }, 0);
@@ -447,12 +449,15 @@ router.post(
         status: "created",
       });
       const orderItems = cart!.cartItems!.map((item) => {
-        let isWithinRange = false;
-        const today = new Date();
-        const startDate = new Date(item.product!.promotionItem!.promotion.startDate);
-        const endDate = new Date(item.product!.promotionItem!.promotion.endDate);
-        isWithinRange = today >= startDate && today <= endDate;
-        const isActive = item.product!.promotionItem && item.product!.promotionItem.promotion.isActive && isWithinRange;
+        let isActive = false;
+        if (item.product!.promotionItem) {
+          const today = new Date();
+          const startDate = new Date(item.product!.promotionItem.promotion.startDate);
+          const endDate = new Date(item.product!.promotionItem.promotion.endDate);
+          if (today >= startDate && today <= endDate && item.product!.promotionItem.promotion.isActive) {
+            isActive = true;
+          }
+        }
         const discountPrice = isActive ? Math.ceil(item.product!.price * (item.product!.promotionItem!.promotion.discountValue / 100)) : null;
         return {
           orderId: order.id,
