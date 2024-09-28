@@ -1,7 +1,7 @@
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { Express } from "express";
-
+require("dotenv").config();
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -10,6 +10,12 @@ const options = {
       version: "1.0.0",
       description: "商城前後台api文件",
     },
+    servers: [
+      {
+        url: `${process.env.BASE_URL}/api`,
+        description: "主伺服器",
+      },
+    ],
   },
   // 這裡配置需要掃描的路徑
   apis: ["./src/routes/**/*.ts", "./dist/routes/**/*.js"],
