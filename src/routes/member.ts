@@ -195,10 +195,13 @@ router.post(
         birthday: member.birthday,
         role: member.role,
       };
-      const jti = uuidv4();
+      let jti = member.refreshTokenJti;
+      if (!member.refreshTokenJti) {
+        jti = uuidv4();
+        await member.update({ refreshTokenJti: jti });
+      }
       const accessToken = generateAccessToken(accessMember);
       const refreshToken = generateRefreshToken({ id: accessMember.id, jti });
-      await member.update({ refreshTokenJti: jti });
       accessMember.accessToken = accessToken;
       accessMember.refreshToken = refreshToken;
       //加入購物車

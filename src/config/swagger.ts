@@ -13,7 +13,7 @@ const options = {
     servers: [
       {
         url: `${process.env.BASE_URL}/api`,
-        description: "主伺服器",
+        description: "正式伺服器",
       },
     ],
   },
