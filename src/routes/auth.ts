@@ -138,10 +138,8 @@ router.get("/refreshToken", async (req: IReq, res: IRes) => {
     birthday: member.birthday,
     role: member.role,
   };
-  const jti = uuidv4();
   const accessToken = generateAccessToken(accessMember);
-  const refreshToken = generateRefreshToken({ id: accessMember.id, jti });
-  await member.update({ refreshTokenJti: jti });
+  const refreshToken = generateRefreshToken({ id: accessMember.id, jti: member.refreshTokenJti });
 
   res.status(HttpStatusCodes.OK).json(responseFormat(req.body, { accessToken, refreshToken }));
 });
