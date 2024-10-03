@@ -1,5 +1,9 @@
 # 購物網站開發專案
 
+## 部署網址
+- [購物網站前端](https://shopping-web-frontend.onrender.com)
+- [Swagger文件](https://shopping-web-backend.onrender.com/api-docs/)
+- 
 - **使用技術**：使用 TypeScript、Express 和 Sequelize 搭配 MySQL 資料庫
   - 負責構建用戶、產品、訂單、活動等核心數據模型
   - 使用 Swagger 管理 API 文件與測試
