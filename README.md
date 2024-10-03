@@ -1,6 +1,6 @@
 # 購物網站開發專案
 
-- **技術棧**：使用 Express 和 Sequelize 搭配 MySQL 資料庫
+- **技術棧**：使用 TypeScript、Express 和 Sequelize 搭配 MySQL 資料庫
   - 負責構建用戶、產品、訂單、活動等核心數據模型
   - 使用 Swagger 管理 API 文件與測試
 
