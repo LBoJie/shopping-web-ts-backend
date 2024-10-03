@@ -38,6 +38,8 @@ const s3 = new S3Client({
  *     tags:
  *       - admin - Product
  *     description: 根據查詢參數獲取產品列表，支持分頁、排序和搜尋功能。
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: query
  *         name: page
@@ -171,11 +173,6 @@ router.get("/", async (req: IReq, res: IRes) => {
           as: "category",
           attributes: [],
         },
-        // {
-        //   model: PromotionItemModel,
-        //   as: "promotionItem",
-        //   attributes: [],
-        // },
       ],
     });
     const totalProductsCount = await ProductModel.count({
@@ -195,6 +192,8 @@ router.get("/", async (req: IReq, res: IRes) => {
  *     tags:
  *       - admin - Product
  *     description: 根據產品 ID 獲取產品的詳細信息。
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -310,6 +309,8 @@ type Product = {
  *     tags:
  *       - admin - Product
  *     description: 上傳產品信息並可選擇上傳圖片，圖片將存儲於 AWS S3 中。
+ *     security:
+ *       - BearerAuth: []
  *     requestBody:
  *       content:
  *         multipart/form-data:
@@ -473,6 +474,8 @@ type PatchRequest = {
  *     tags:
  *       - admin - Product
  *     description: 更新指定 ID 的產品資訊。可以使用 JSON Patch 格式進行局部更新，並可選擇上傳或替換圖片。若更新時替換了圖片，將會刪除之前上傳的圖片。
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -585,6 +588,8 @@ router.patch("/:id", uploadMemory.single("img"), async (req: IReq<PatchRequest>,
  *     tags:
  *       - admin - Product
  *     description: 根據指定的產品 ID 刪除產品。如果產品有關聯的圖片，則從 AWS S3 刪除該圖片。
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id

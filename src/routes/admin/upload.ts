@@ -33,6 +33,8 @@ const s3 = new S3Client({
  *     tags:
  *       - admin - Upload
  *     description: 將上傳的圖片存儲到 AWS S3，並返回圖片的 URL。
+ *     security:
+ *       - BearerAuth: []
  *     requestBody:
  *       content:
  *         multipart/form-data:

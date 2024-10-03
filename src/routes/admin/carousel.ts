@@ -37,6 +37,8 @@ const router = Router();
  *     tags:
  *       - admin - Carousel
  *     description: 根據分類ID，取得該分類下所有的輪播，並依據順序升序排列。
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -108,6 +110,8 @@ router.get("/:id", async (req: IReq, res: IRes) => {
  *   post:
  *     summary: 新增輪播
  *     description: 新增一個新的輪播項目並上傳圖片到 AWS S3。
+ *     security:
+ *       - BearerAuth: []
  *     tags:
  *       - admin - Carousel
  *     requestBody:
@@ -212,6 +216,8 @@ router.post("/", uploadMemory.single("img"), async (req: IReq<CarouselModel>, re
  *   patch:
  *     summary: 修改輪播順序
  *     description: 更新一組輪播項目的順序。
+ *     security:
+ *       - BearerAuth: []
  *     tags:
  *       - admin - Carousel
  *     requestBody:
@@ -289,6 +295,8 @@ router.patch("/order", async (req: IReq<OrderPatch>, res: IRes) => {
  *   patch:
  *     summary: 更新輪播項目
  *     description: 更新指定 ID 的輪播項目。可以更新圖片和其他屬性。如果上傳了新的圖片，會將舊的圖片從 AWS S3 刪除並上傳新的圖片。
+ *     security:
+ *       - BearerAuth: []
  *     tags:
  *       - admin - Carousel
  *     parameters:
@@ -399,6 +407,8 @@ router.patch("/:id", uploadMemory.single("img"), async (req: IReq<carouselPatch>
  *   delete:
  *     summary: 刪除指定的輪播項目
  *     description: 根據指定的 ID 刪除輪播項目。如果輪播項目存在，將會從 AWS S3 刪除對應的圖片並刪除資料庫中的記錄。
+ *     security:
+ *       - BearerAuth: []
  *     tags:
  *       - admin - Carousel
  *     parameters:

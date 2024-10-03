@@ -14,6 +14,8 @@ const router = Router();
  *     tags:
  *       - admin - Order
  *     description: 根據訂單 ID 獲取單個訂單的詳細資訊。如果未提供訂單 ID，則返回所有訂單的列表。
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -267,6 +269,8 @@ router.get("/:id?", async (req: IReq, res: IRes) => {
  *     tags:
  *       - admin - Order
  *     description: 根據訂單 ID 更新訂單的狀態。status 參數為 confirmed - 確認訂單中  shipped - 已出貨  delivered - 已送達  canceled - 已取消
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id

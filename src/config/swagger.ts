@@ -10,10 +10,18 @@ const options = {
       version: "1.0.0",
       description: "商城前後台api文件",
     },
+    components: {
+      securitySchemes: {
+        BearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
     servers: [
       {
         url: `${process.env.BASE_URL}/api`,
-        description: "正式伺服器",
       },
     ],
   },

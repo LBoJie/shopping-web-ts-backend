@@ -15,6 +15,8 @@ type Category = {
  * /admin/category:
  *   get:
  *     summary: 獲取所有分類
+ *     security:
+ *       - BearerAuth: []
  *     tags:
  *       - admin - Category
  *     description: 獲取所有分類的資料。
@@ -77,6 +79,8 @@ router.get("/", async (req: IReq, res: IRes) => {
  *     tags:
  *       - admin - Category
  *     description: 創建一個新的分類並將其儲存到資料庫中。
+ *     security:
+ *       - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -147,6 +151,8 @@ router.post("/", async (req: IReq<Category>, res: IRes) => {
  *     tags:
  *       - admin - Category
  *     description: 根據分類的 ID 更新分類的資料。
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id

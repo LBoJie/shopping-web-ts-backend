@@ -40,6 +40,8 @@ type Promotion = PromotionModel & {
  *     tags:
  *       - admin - Promotion
  *     description: 返回所有產品的詳細資訊，包括產品 ID、名稱、價格、庫存、狀態、圖片 URL、類別名稱和促銷 ID。
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
  *         description: 成功返回所有產品的資訊
@@ -137,6 +139,8 @@ router.get("/product", async (req: IReq, res: IRes) => {
  *     tags:
  *       - admin - Promotion
  *     description: 根據促銷活動 ID 獲取詳細資訊。如果未提供 ID，則返回所有促銷活動的列表。
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -291,6 +295,8 @@ router.get("/:id?", async (req: IReq, res: IRes) => {
  *     tags:
  *       - admin - Promotion
  *     description: 創建一個新的促銷活動，包括上傳圖片（如果提供）並將促銷活動與產品關聯。
+ *     security:
+ *       - BearerAuth: []
  *     requestBody:
  *       content:
  *         multipart/form-data:
@@ -415,6 +421,8 @@ type PromotionPatch = {
  *     tags:
  *       - admin - Promotion
  *     description: 更新指定的促銷活動，包括圖片的替換（如果提供），以及更新活動的字段和與產品的關聯。
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -494,7 +502,6 @@ router.patch("/:id", uploadMemory.single("img"), async (req: IReq<PromotionPatch
       const deleteCommand = new DeleteObjectCommand(deleteParams);
       await s3.send(deleteCommand);
     }
-    // return res.status(HttpStatusCodes.OK).json(responseFormat(req.body, updatedFields));
 
     if (req.file) {
       //上傳圖片到 aws-s3

@@ -15,7 +15,7 @@ const router = Router();
  *       - Cart
  *     description: 查詢當前會員的購物車內容，並包括商品的促銷信息。如果購物車不存在，則自動創建一個空的購物車。
  *     security:
- *       - bearerAuth: []
+ *       - BearerAuth: []
  *     responses:
  *       200:
  *         description: 成功返回會員的購物車內容
@@ -152,7 +152,7 @@ router.get("/", authenticateAccessToken, async (req: JwtReq, res: IRes) => {
  *       - Cart
  *     description: 將選定的商品加入到會員的購物車中，並檢查庫存是否充足。
  *     security:
- *       - bearerAuth: []
+ *       - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -267,7 +267,7 @@ router.post("/", authenticateAccessToken, async (req: JwtReq, res) => {
  *       - Cart
  *     description: 根據會員 ID 和商品 ID 更新購物車中的商品數量。
  *     security:
- *       - bearerAuth: []
+ *       - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -337,7 +337,7 @@ router.patch("/", authenticateAccessToken, async (req: JwtReq<EditCartItem>, res
  *       - Cart
  *     description: 根據會員 ID 和商品 ID，從購物車中刪除對應的商品。
  *     security:
- *       - bearerAuth: []
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -393,7 +393,7 @@ router.delete("/:id", authenticateAccessToken, async (req: JwtReq, res) => {
  *       - Cart
  *     description: 根據會員 ID 檢查購物車中的商品，是否下架或庫存不足。
  *     security:
- *       - bearerAuth: []
+ *       - BearerAuth: []
  *     responses:
  *       200:
  *         description: 檢查成功，無錯誤

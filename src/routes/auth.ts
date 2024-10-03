@@ -19,10 +19,6 @@ type AccessMember = {
   role: string;
 };
 
-router.get("/getRole", authenticateAccessToken, async (req: JwtReq, res: IRes) => {
-  res.status(HttpStatusCodes.OK).json(req.member?.role);
-});
-
 /**
  * @swagger
  * /refreshToken:
